@@ -31,3 +31,26 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+
+const header = document.querySelector('.header');
+
+const allButtons = document.getElementsByTagName('button'); // returns automatically updated collection of html elements
+
+// Creating and inserting elements
+// .insertAdjacentHTML
+
+// Cookie message
+
+const message = document.createElement('div');
+message.classList.add('cookie-message');
+// message.textContent = 'We use cookies for improved functionality.';
+message.innerHTML = 'We use cookies for improved functionality and analytics. <button class="btn btn--close--cookie">Got it!</button>';
+
+header.append(message);
+// header.prepend(message.cloneNode(true)); // clone an element
+
+// Delete elements
+document.querySelector('.btn--close--cookie').addEventListener('click', function() {
+  message.remove();
+})
+
