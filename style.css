@@ -23,6 +23,7 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 body {
@@ -669,7 +670,7 @@ h4 {
   padding: 1rem 15rem 1rem 15rem;
   width: 100%;
   background-color: white;
-  color: #aaa;
+  color: #ccc;
   font-size: 1.5rem;
   font-weight: 400;
 }

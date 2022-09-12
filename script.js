@@ -54,3 +54,40 @@ document.querySelector('.btn--close--cookie').addEventListener('click', function
   message.remove();
 })
 
+// Styles
+message.style.backgroundColor = '#37383d';
+message.style.width = '110%';
+
+console.log(getComputedStyle(message).color);
+
+// message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+// console.log(message.style.height);
+
+// document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// Attributes. You can't access not-standard HTML properties
+const logo = document.querySelector('.nav__logo');
+console.log(logo.src);
+console.log(logo.alt);
+console.log(logo.className);
+
+// How to change properties values
+logo.alt = 'Minimalist logo';
+console.log(logo.alt);
+
+// How to access not standard HTML properties
+// console.log(logo.getAttribute('designer'));
+
+// Data Attributes data-
+console.log(logo.dataset.versionNumber);
+
+// Classes
+// logo.classList.add();
+// logo.classList.remove();
+// logo.classList.toggle();
+// logo.classList.contains();
+
+// Change class name. Don't use it, cause it overwrites all of the existing classes and allows us have only one class on any element
+
+// logo.className = 'name';
+// console.log(logo.className); // name
