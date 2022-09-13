@@ -31,7 +31,42 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+// Smooth Scrolling
 
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function(e) {
+  // Scrolling - Modern way
+  section1.scrollIntoView({behavior: 'smooth'});
+
+
+  // Old Way
+  /*
+  const s1coords = section1.getBoundingClientRect();
+  window.scrollTo({
+    left: s1coords.left + window.pageXOffset, 
+    top: s1coords.top + window.pageYOffset,
+    behavior: 'smooth',
+  });
+  */
+
+  // console.log(s1coords);
+
+  // console.log(e.target.getBoundingClientRect());
+
+  // console.log('Current scroll(X/Y)', window.pageXOffset, window.pageYOffset);
+
+  // console.log('height/width viewport', document.documentElement.clientHeight, document.documentElement.clientWidth);
+})
+
+
+
+
+
+// THEORY LECTURES
+
+/*
 const header = document.querySelector('.header');
 
 const allButtons = document.getElementsByTagName('button'); // returns automatically updated collection of html elements
@@ -91,3 +126,4 @@ console.log(logo.dataset.versionNumber);
 
 // logo.className = 'name';
 // console.log(logo.className); // name
+*/
