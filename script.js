@@ -78,6 +78,33 @@ document.querySelector('.nav__links').addEventListener('click', function(e) {
   }
 })
 
+// Tabbed Component - Operations Section
+const tabs = document.querySelectorAll('.operations__tab')
+
+const tabsContainer = document.querySelector('.operations__tab-container')
+
+const tabsContent = document.querySelectorAll('.operations__content')
+
+
+tabsContainer.addEventListener('click', function(e) {
+  const clicked = e.target.closest('.operations__tab');
+
+  // Remove Active tab and content
+  function removeActive(parent, rem) {
+    parent.forEach(e => e.classList.remove(rem))
+  }
+
+  // Guard Clause
+  if(!clicked) return;
+
+  // Active Tab
+  removeActive(tabs, 'operations__tab--active')
+  clicked.classList.add('operations__tab--active');
+
+  // Active Content Area
+  removeActive(tabsContent, 'operations__content--active');
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
+})
 
 
 
@@ -179,52 +206,38 @@ document.querySelector('.nav').addEventListener('click', function(e) {
 
 */
 
-
-// THEORY LECTURES
-
+// DOM Traversy
 /*
-const header = document.querySelector('.header');
 
-const allButtons = document.getElementsByTagName('button'); // returns automatically updated collection of html elements
+const h1 = document.querySelector('h1');
 
-// Creating and inserting elements
-// .insertAdjacentHTML
+// Going downwards: child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children); // updated live collection; works only for direct children
 
-// Styles
-message.style.backgroundColor = '#37383d';
-message.style.width = '110%';
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
 
-console.log(getComputedStyle(message).color);
+// Going upwards: parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
 
-// message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
-// console.log(message.style.height);
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
 
-// document.documentElement.style.setProperty('--color-primary', 'orangered');
+// Closest h1 element to h1 is h1 itself
+h1.closest('h1').style.background = 'var(--gradient-primary)';
 
-// Attributes. You can't access not-standard HTML properties
-const logo = document.querySelector('.nav__logo');
-console.log(logo.src);
-console.log(logo.alt);
-console.log(logo.className);
+// Going sideways: siblings. We can only address the direct siblings - the previous and the next one
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
 
-// How to change properties values
-logo.alt = 'Minimalist logo';
-console.log(logo.alt);
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
 
-// How to access not standard HTML properties
-// console.log(logo.getAttribute('designer'));
-
-// Data Attributes data-
-console.log(logo.dataset.versionNumber);
-
-// Classes
-// logo.classList.add();
-// logo.classList.remove();
-// logo.classList.toggle();
-// logo.classList.contains();
-
-// Change class name. Don't use it, cause it overwrites all of the existing classes and allows us have only one class on any element
-
-// logo.className = 'name';
-// console.log(logo.className); // name
+// To access all of the siblings
+console.log(h1.parentElement.children);
+[...h1.parentElement.children].forEach(function(el) {
+  if(el !== h1) el.style.transform = 'scale(0.500)'
+})
 */
