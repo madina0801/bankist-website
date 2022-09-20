@@ -129,71 +129,106 @@ nav.addEventListener("mouseout", handleHover(1));
 // Sticky Navigation: Intersection Observer API
 const navHeight = nav.getBoundingClientRect().height;
 
-
-const stickyNav = function(entries) {
+const stickyNav = function (entries) {
   const [entry] = entries;
 
-  if(!entry.isIntersecting) nav.classList.add('sticky') 
-  else nav.classList.remove('sticky')
-}
+  if (!entry.isIntersecting) nav.classList.add("sticky");
+  else nav.classList.remove("sticky");
+};
 
 const headerObserver = new IntersectionObserver(stickyNav, {
   root: null,
   threshold: 0,
-  rootMargin: `-${navHeight}px`, 
+  rootMargin: `-${navHeight}px`,
 });
 headerObserver.observe(header);
 
 // Revealing Elements on Scroll
-const allSections = document.querySelectorAll('.section')
+const allSections = document.querySelectorAll(".section");
 
-const revealSection = function(entries, observer) {
+const revealSection = function (entries, observer) {
   const [entry] = entries;
 
-  if(!entry.isIntersecting) return;
+  if (!entry.isIntersecting) return;
 
-  entry.target.classList.remove('section--hidden');
+  entry.target.classList.remove("section--hidden");
   observer.unobserve(entry.target);
-}
+};
 
 const sectionObserver = new IntersectionObserver(revealSection, {
   root: null,
-  threshold: 0.15, 
-})
+  threshold: 0.15,
+});
 
-allSections.forEach(function(section) {
+allSections.forEach(function (section) {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
-})
+  section.classList.add("section--hidden");
+});
 
 // Lazy Loading Images
-const imgTargets = document.querySelectorAll('img[data-src]');
+const imgTargets = document.querySelectorAll("img[data-src]");
 
-const loadImg = function(entries, observer) {
-  entries.forEach(entry => {    
-    if(!entry.isIntersecting) return;
-  
+const loadImg = function (entries, observer) {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+
     // Replace src with data-src
     entry.target.src = entry.target.dataset.src;
-    entry.target.addEventListener('load', function() {
-      entry.target.classList.remove('lazy-img');
-    })
-  
+    entry.target.addEventListener("load", function () {
+      entry.target.classList.remove("lazy-img");
+    });
+
     observer.unobserve(entry.target);
-  })
-}
+  });
+};
 
 const imgObserver = new IntersectionObserver(loadImg, {
   root: null,
   threshold: 0,
-  rootMargin: '200px',
-})
+  rootMargin: "200px",
+});
 
-imgTargets.forEach(img => imgObserver.observe(img));
+imgTargets.forEach((img) => imgObserver.observe(img));
+
+// Reviews Slider Component
+const allSlides = document.querySelectorAll(".slide");
+const btnLeft = document.querySelector(".slider__btn--left");
+const btnRight = document.querySelector(".slider__btn--right");
+
+let curSlide = 0;
+const maxSlide = allSlides.length;
+
+const goToSlide = function (slide) {
+  allSlides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+    );
+};
+
+goToSlide(0);
+
+// Go to the next slide
+const nextSlide = function () {
+  if (curSlide === maxSlide - 1) {
+    curSlide = 0;
+  } else curSlide++;
+  goToSlide(curSlide);
+};
+
+const prevSlide = function() {
+  if(curSlide === 0) {
+    curSlide = maxSlide - 1;
+  } else curSlide--;
+  goToSlide(curSlide);
+}
+
+btnRight.addEventListener("click", nextSlide);
+btnLeft.addEventListener("click", prevSlide);
 
 
 
-
+// const slider = document.querySelector(".slider");
+// slider.style.transform = "scale(0.2) translateX(-1200px)";
+// slider.style.overflow = "visible";
 
 
 /*
